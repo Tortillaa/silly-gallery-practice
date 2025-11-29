@@ -1,16 +1,21 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View, Text} from 'react-native';
 import GaleryComponent from './components/GaleryComponent';
+import { useState } from 'react';
 
 export default function App() {
+
+  const [likes, setLikes] = useState<number>(0);
+
   return (
     <View style={styles.container}>
       <View style={styles.textContainer}>
         <Text style={styles.title}>Silly gallery</Text>
         <Text style={styles.subtitle}>A practice about React Native</Text>
+        <Text style={{ fontSize: 18 }}>Total likes: {likes}</Text>
       </View>
       <StatusBar hidden={true} />
-      <GaleryComponent />
+      <GaleryComponent onLike={() => setLikes(likes + 1)} />
     </View>
   );
 }

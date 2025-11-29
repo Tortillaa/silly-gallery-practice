@@ -12,11 +12,20 @@ const images = [
   require('../assets/perro6.jpg'),
 ];
 
-export default function GaleryComponent() {
+interface Props {
+  onLike: () => void;
+}
+
+const GaleryComponent: React.FC<Props> = ({ onLike }) => {
   const [selectedImage, setSelectedImage] = useState<any | null>(null);
 
+  const openModal = (image: any) => {
+    setSelectedImage(image);
+    onLike(); // 👈 Aumenta contador global
+  };
+
   const renderItem = ({ item }: { item: any }) => (
-    <ImageComponent uri={item} onPress={() => setSelectedImage(item)} />
+    <ImageComponent uri={item} onPress={() => openModal(item)} />
   );
 
   return (
@@ -30,11 +39,18 @@ export default function GaleryComponent() {
         contentContainerStyle={{ padding: 10 }}
       />
 
-      <Modal visible={selectedImage !== null} transparent={true} animationType="fade">
-        <Pressable style={styles.modalContainer} onPress={() => setSelectedImage(null)}>
+      <Modal
+        visible={selectedImage !== null}
+        transparent={true}
+        animationType="fade"
+      >
+        <Pressable
+          style={styles.modalContainer}
+          onPress={() => setSelectedImage(null)}
+        >
           <View style={styles.modalContent}>
             {selectedImage && <Image source={selectedImage} style={styles.modalImage} />}
-            <Text style={styles.modalText}>Toca para cerrar</Text>
+            <Text style={styles.modalText}>Tap to close</Text>
           </View>
         </Pressable>
       </Modal>
@@ -44,8 +60,15 @@ export default function GaleryComponent() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: "#fff", paddingTop: 40 },
-  modalContainer: { flex: 1, backgroundColor: "rgba(0,0,0,0.8)", justifyContent: "center", alignItems: "center" },
+  modalContainer: {
+    flex: 1,
+    backgroundColor: "rgba(0,0,0,0.8)",
+    justifyContent: "center",
+    alignItems: "center"
+  },
   modalContent: { alignItems: "center" },
   modalImage: { width: 300, height: 300, borderRadius: 15 },
   modalText: { color: "white", marginTop: 20, fontSize: 18 },
 });
+
+export default GaleryComponent;
