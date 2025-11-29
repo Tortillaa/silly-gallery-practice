@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { View, FlatList, Modal, Pressable, Image, Text, StyleSheet } from "react-native";
 import ImageComponent from "./ImageComponent";
 
-// Cargamos las imágenes directamente con require
 const images = [
   require('../assets/perro1.jpg'),
   require('../assets/perro2.jpg'),
@@ -59,16 +58,24 @@ const GaleryComponent: React.FC<Props> = ({ onLike }) => {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#fff", paddingTop: 40 },
+  container: { 
+    flex: 1, 
+    backgroundColor: "#fff",
+    paddingTop: 40 },
   modalContainer: {
     flex: 1,
     backgroundColor: "rgba(0,0,0,0.8)",
     justifyContent: "center",
-    alignItems: "center"
-  },
+    alignItems: "center" },
   modalContent: { alignItems: "center" },
-  modalImage: { width: 300, height: 300, borderRadius: 15 },
-  modalText: { color: "white", marginTop: 20, fontSize: 18 },
+  modalImage: { 
+    width: 300, 
+    height: 300, 
+    borderRadius: 15 },
+  modalText: { 
+    color: "white", 
+    marginTop: 20, 
+    fontSize: 18 },
 });
 
 export default GaleryComponent;

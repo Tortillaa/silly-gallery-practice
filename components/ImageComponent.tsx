@@ -2,7 +2,7 @@ import React from "react";
 import { Pressable, Image, StyleSheet } from "react-native";
 
 type Props = {
-  uri: any; // para require de RN
+  uri: any;
   onPress: () => void;
 };
 
